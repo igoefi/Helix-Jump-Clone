@@ -6,10 +6,32 @@ public class Player : MonoBehaviour
 
     private Rigidbody _body;
 
+    private Vector3 _firstPosition;
+
     private void Start()
     {
         _body = GetComponent<Rigidbody>();
+        _firstPosition = transform.position;
     }
+
+
+    private void Jump()
+    {
+        Vector3 jumpVector = new(0, jumpForce, 0);
+        _body.velocity = jumpVector;
+    }
+
+    private void Dead()
+    {
+        GameManager.Losing();
+        _body.velocity = Vector3.zero;
+    }
+
+    public void GoToFirstPosition()
+    {
+        transform.position = _firstPosition;
+    }
+    
     private void OnCollisionEnter(Collision collision)
     {
         Sector sector = collision.gameObject.GetComponent<Sector>();
@@ -20,18 +42,10 @@ public class Player : MonoBehaviour
             else
                 Dead();
         }
+        else if(collision.gameObject.GetComponent<FinishPlatform>() != null)
+        {
+            _body.velocity = Vector3.zero;
+            GameManager.Winning();
+        }
     }
-
-    private void Jump()
-    {
-        Vector3 jumpVector = new(0, jumpForce, 0);
-        _body.velocity = jumpVector;
-    }
-
-    private void Dead()
-    {
-        Debug.Log("dead");
-        _body.velocity = Vector3.zero;
-    }
-
 }

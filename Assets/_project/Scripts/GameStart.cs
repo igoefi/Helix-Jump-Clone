@@ -1,37 +1,41 @@
-using System;
 using UnityEngine;
 
 public class GameStart : MonoBehaviour
 {
-    [SerializeField] Material[] goodMaterials;
-    [SerializeField] Material[] badMaterials;
-    [SerializeField] Material[] cylinderMaterials;
-    [SerializeField] Material[] playerMaterials;
+    [SerializeField] Material[] GoodMaterials;
+    [SerializeField] Material[] BadMaterials;
+    [SerializeField] Material[] CylinderMaterials;
+    [SerializeField] Material[] PlayerMaterials;
 
     [SerializeField] GameObject[] FloorPrefs;
+
+    [SerializeField] GameObject Player;
+    [SerializeField] GameObject Cylinder;
+    [SerializeField] GameObject Finish;
+
+    [SerializeField] SectorsTexture FirstSectors;
 
     private Material _goodMaterial;
     private Material _badMaterial;
     private Material _cylinderMaterial;
     private Material _playerMaterial;
 
+    private int _sumPlatforms;
+
     void Start()
     {
         int level = PlayerPrefs.GetInt("level", 1);
 
-        _goodMaterial = goodMaterials[goodMaterials.Length % level];
-        _badMaterial = badMaterials[badMaterials.Length % level];
-        _cylinderMaterial = cylinderMaterials[cylinderMaterials.Length % level];
-        _playerMaterial = playerMaterials[playerMaterials.Length % level];
+        _goodMaterial = GoodMaterials[level % GoodMaterials.Length];
+        _badMaterial = BadMaterials[level % BadMaterials.Length];
+        _cylinderMaterial = CylinderMaterials[level % CylinderMaterials.Length];
+        _playerMaterial = PlayerMaterials[level % PlayerMaterials.Length];
 
         CreateLevel();
 
         SetMaterials();
-    }
 
-    private void Update()
-    {
-        SetFloorMaterials();
+        Destroy(gameObject.GetComponent<GameStart>());
     }
 
     private void CreateLevel()
@@ -42,53 +46,32 @@ public class GameStart : MonoBehaviour
             Floor floor = child.gameObject.GetComponent<Floor>();
             if (floor != null)
             {
+                _sumPlatforms++;
+
                 System.Random rand = new();
                 int randFloorIndex = rand.Next(0, FloorPrefs.Length);
 
+                floor.SetMaterial(_goodMaterial, _badMaterial);
                 floor.SetFloor(FloorPrefs[randFloorIndex]);
+
             }
         }
 
+        GetComponent<GameManager>().SumPlatforms += _sumPlatforms;
     }
 
 
     private void SetMaterials()
     {
-        foreach (Transform child in transform)
-        {
-            if (child.GetComponent<Floor>() != null || child.GetComponent<SectorsTexture>() != null) return;
-
-            if (child.GetComponent<Player>() != null)
-            {
-                SetMaterialInMesh(child.gameObject, _playerMaterial);
-            }
-            else if (child.GetComponent<FinishPlatform>() != null)
-            {
-                SetMaterialInMesh(child.gameObject, _goodMaterial);
-            }
-            else
-            {
-                //цилиндр
-                SetMaterialInMesh(child.gameObject, _cylinderMaterial);
-            }
-        }
-    }
-
-    private void SetFloorMaterials()
-    {
-        foreach (Transform child in transform)
-        {
-            SectorsTexture floor = child.GetComponent<SectorsTexture>();
-            if (floor != null)
-            {
-                floor.BadMaterial = _badMaterial;
-                floor.GoodMaterial = _goodMaterial;
-            }
-        }
+        FirstSectors.SetMaterials(_goodMaterial, _badMaterial);
+        SetMaterialInMesh(Player, _playerMaterial);
+        SetMaterialInMesh(Finish, _goodMaterial);
+        SetMaterialInMesh(Cylinder, _cylinderMaterial);
     }
 
     private void SetMaterialInMesh(GameObject Object, Material material)
     {
-        Object.GetComponent<MeshRenderer>().material = material;
+        if (Object != null)
+            Object.GetComponent<MeshRenderer>().material = material;
     }
 }

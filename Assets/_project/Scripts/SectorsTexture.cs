@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class SectorsTexture : MonoBehaviour
 {
-    public Material GoodMaterial { get; set; }
-    public Material BadMaterial { get; set; }
+    private Material _goodMaterial;
+    private Material _badMaterial;
 
     private bool isFullMaterial;
+
+    [SerializeField] bool IsFirst = false;
     private void Start()
     {
         List<Sector> listSectors = new();
@@ -15,14 +17,15 @@ public class SectorsTexture : MonoBehaviour
             listSectors.Add(child.gameObject.GetComponent<Sector>());
         }
 
-        SetRandBadSectors(listSectors);
+        if(!IsFirst)
+            SetRandBadSectors(listSectors);
 
     }
     void Update()
     {
-        if (isFullMaterial) return;
+        if (isFullMaterial) Destroy(GetComponent<SectorsTexture>());
 
-        if (GoodMaterial != null && BadMaterial != null)
+        if (_goodMaterial != null && _badMaterial != null)
         {
             isFullMaterial = true;
             foreach (Transform child in transform)
@@ -30,11 +33,17 @@ public class SectorsTexture : MonoBehaviour
                 MeshRenderer meshRend = child.GetComponent<MeshRenderer>();
 
                 if (child.GetComponent<Sector>().IsGood)
-                    meshRend.material = GoodMaterial;
+                    meshRend.material = _goodMaterial;
                 else
-                    meshRend.material = BadMaterial;
+                    meshRend.material = _badMaterial;
             }
         }
+    }
+
+    public void SetMaterials(Material goodMaterial, Material badMaterial)
+    {
+        _goodMaterial = goodMaterial;
+        _badMaterial = badMaterial;
     }
 
     private void SetRandBadSectors(List<Sector> list)

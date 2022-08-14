@@ -6,6 +6,8 @@ public class RandomRotationSector : MonoBehaviour
 {
     void Start()
     {
-        transform.Rotate(new Vector3(0, Random.Range(0, 360), 0));
+        System.Random rand = new();
+        transform.Rotate(new Vector3(0, rand.Next(0, 360), 0));
+        Destroy(GetComponent<RandomRotationSector>());
     }
 }
