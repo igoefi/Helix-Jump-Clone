@@ -1742,29 +1742,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GoodMaterials:
-  - {fileID: 2100000, guid: 82b3a75aca7ed6f4abe443d8019d9ddb, type: 2}
+  - {fileID: 2100000, guid: 0c26b4c84ab19ad458dc8f02ac1747a7, type: 2}
   - {fileID: 2100000, guid: a08dad81b78f42e489c9703efc2c1fb0, type: 2}
-  - {fileID: 2100000, guid: f4dcba098a2788048a77363897d1a6b6, type: 2}
+  - {fileID: 2100000, guid: ff712044a1677cb4faaf77165685c5cb, type: 2}
   - {fileID: 2100000, guid: 9b56e06f8d3f8584597ec8a11bd1f200, type: 2}
+  - {fileID: 2100000, guid: 530bb4bbf64f6a8498aac9f9a1644e3e, type: 2}
+  - {fileID: 2100000, guid: 3319a57c0b6518e4aa93bd2e3edd9bfe, type: 2}
   BadMaterials:
-  - {fileID: 2100000, guid: 363270fb71ae7aa45ac7c91408bbe012, type: 2}
+  - {fileID: 2100000, guid: 90cb3c645e5ce7f4b828c0fbe100151c, type: 2}
   - {fileID: 2100000, guid: 9c499f1f265a28748a3f4ccecb05c8c8, type: 2}
-  - {fileID: 2100000, guid: 520938bf13624b04fb159c3db7351aca, type: 2}
+  - {fileID: 2100000, guid: 35df40f761814274781e96c08282a5c7, type: 2}
   - {fileID: 2100000, guid: 261ce03210dba03488d4c264cc8d0528, type: 2}
+  - {fileID: 2100000, guid: 9a526ccb9696d6545b3991e93bfb18bd, type: 2}
+  - {fileID: 2100000, guid: 78974d2f85a59fc499d154e567c11d49, type: 2}
   CylinderMaterials:
-  - {fileID: 2100000, guid: 2a81fb5b4c7ffd34a86add061bd2f815, type: 2}
+  - {fileID: 2100000, guid: 8f9382b6ee249484cbcff1dffda47574, type: 2}
   - {fileID: 2100000, guid: f112b988042d5844d86a06f124d4ea41, type: 2}
-  - {fileID: 2100000, guid: 33edbb19ee29c624ab5c9184c95c5f2b, type: 2}
+  - {fileID: 2100000, guid: 113b786486a12014a922d67a00c08a43, type: 2}
   - {fileID: 2100000, guid: 5f0995ce430fd1745a585b6cfe9c2ca9, type: 2}
+  - {fileID: 2100000, guid: 7ba8162d09542e34b9a72bb543447494, type: 2}
+  - {fileID: 2100000, guid: 5c8a4e1f248ae9f4fab83ef327ff3898, type: 2}
   PlayerMaterials:
-  - {fileID: 2100000, guid: b448f0b66ddeb424097cf4c3aede85fd, type: 2}
+  - {fileID: 2100000, guid: 90cb3c645e5ce7f4b828c0fbe100151c, type: 2}
   - {fileID: 2100000, guid: 09b830498de6c894ead635fafa7d6b81, type: 2}
-  - {fileID: 2100000, guid: a63a8692330ab5f4dbb2761bf7924361, type: 2}
+  - {fileID: 2100000, guid: 41beb21326c85d24dacf689b2b30703f, type: 2}
   - {fileID: 2100000, guid: 3584c50ec7d45f348a5aa57d24bb5737, type: 2}
+  - {fileID: 2100000, guid: 196a83e4fac7a644ebc189706f6c2082, type: 2}
+  - {fileID: 2100000, guid: 6641b0d643f3f3641a48f1a476baf386, type: 2}
   FloorPrefs:
   - {fileID: 1051059552838679117, guid: f8c9ff482da199740ad1545fc2cf658e, type: 3}
   - {fileID: 1051059552838679117, guid: b3a5a8d475e0be44d8030747b0a49e0d, type: 3}
   - {fileID: 1051059552838679117, guid: bc31aea2e2d7034449471f2e47146df4, type: 3}
+  - {fileID: 1051059552838679117, guid: 3d43ffba408f11844a29b436971d0b71, type: 3}
+  - {fileID: 1051059552838679117, guid: 3d43ffba408f11844a29b436971d0b71, type: 3}
   - {fileID: 1051059552838679117, guid: 3d43ffba408f11844a29b436971d0b71, type: 3}
   Player: {fileID: 1903898454}
   Cylinder: {fileID: 243330157}
@@ -2726,7 +2736,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1903898454}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.12, y: -3.22, z: -2.83}
+  m_LocalPosition: {x: 0.12, y: -3.22, z: -3.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -19,15 +19,20 @@ public class UI : MonoBehaviour
 
     private void Start()
     {
-        levelText.text = "Level: " + PlayerPrefs.GetInt("level");
+        if(levelText != null)
+            levelText.text = "Level: " + PlayerPrefs.GetInt("level");
     }
 
     private void Update()
     {
-        PlatformText.text = GameManager.PlatformsPassed.ToString();
+        if(PlatformText != null)
+            PlatformText.text = GameManager.PlatformsPassed.ToString();
 
-        float value = (float)GameManager.PlatformsPassed / gameManager.SumPlatforms;
-        PassedPlatformImage.fillAmount = value;
+        if (PassedPlatformImage != null)
+        {
+            float value = (float)GameManager.PlatformsPassed / gameManager.SumPlatforms;
+            PassedPlatformImage.fillAmount = value;
+        }
     }
 
     public void OpenLoseMenu()
