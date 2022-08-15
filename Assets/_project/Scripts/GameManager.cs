@@ -10,18 +10,19 @@ public class GameManager : MonoBehaviour
     public int SumPlatforms { get; set; } = 1;
     static public int PlatformsPassed { get; set; }
 
-    static GameState _gameState;
+    static public GameStates GameState { get; private set; }
 
     private bool _isEndGame;
-    enum GameState
+    public enum GameStates
     {
         Playing,
         Won,
         Lose
     }
+
     private void Start()
     {
-        _gameState = GameState.Playing;
+        GameState = GameStates.Playing;
         _isEndGame = false;
         Debug.Log(SumPlatforms);
         PlatformsPassed = 0;
@@ -29,25 +30,25 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (_isEndGame || _gameState == GameState.Playing) return;
+        if (_isEndGame || GameState == GameStates.Playing) return;
 
         _isEndGame = true;
 
-        if (_gameState == GameState.Won)
+        if (GameState == GameStates.Won)
             ui.OpenWonMenu();
-        else if (_gameState == GameState.Lose)
+        else if (GameState == GameStates.Lose)
             ui.OpenLoseMenu();
     }
 
     static public void Losing()
     {
         PlayerControls.IsPlaying = false;
-        _gameState = GameState.Lose;
+        GameState = GameStates.Lose;
     }   
     static public void Winning()
     {
         PlayerControls.IsPlaying = false;
-        _gameState = GameState.Won;
+        GameState = GameStates.Won;
 
         int level = PlayerPrefs.GetInt("level", 1);
         PlayerPrefs.SetInt("level", level + 1);
@@ -61,7 +62,7 @@ public class GameManager : MonoBehaviour
         camera.ResetPosition();
 
         _isEndGame = false;
-        _gameState = GameState.Playing;
+        GameState = GameStates.Playing;
 
         PlayerControls.ResetRotation();
 

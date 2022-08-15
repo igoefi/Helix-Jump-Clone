@@ -34,6 +34,8 @@ public class Player : MonoBehaviour
     
     private void OnCollisionEnter(Collision collision)
     {
+        if (GameManager.GameState != GameManager.GameStates.Playing) return;
+
         Sector sector = collision.gameObject.GetComponent<Sector>();
         if (sector != null)
         {
