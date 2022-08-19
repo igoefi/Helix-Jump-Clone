@@ -8,10 +8,14 @@ public class Player : MonoBehaviour
 
     private Vector3 _firstPosition;
 
+    private AudioSource _audioSourse;
+
     private void Start()
     {
         _body = GetComponent<Rigidbody>();
         _firstPosition = transform.position;
+
+        _audioSourse = GetComponent<AudioSource>();
     }
 
 
@@ -19,6 +23,12 @@ public class Player : MonoBehaviour
     {
         Vector3 jumpVector = new(0, jumpForce, 0);
         _body.velocity = jumpVector;
+
+        if (_audioSourse != null)
+        {
+            _audioSourse.volume = Random.Range(0.5f, 1);
+            _audioSourse.Play();
+        }
     }
 
     private void Dead()
@@ -31,7 +41,7 @@ public class Player : MonoBehaviour
     {
         transform.position = _firstPosition;
     }
-    
+
     private void OnCollisionEnter(Collision collision)
     {
         if (GameManager.GameState != GameManager.GameStates.Playing) return;
@@ -44,7 +54,7 @@ public class Player : MonoBehaviour
             else
                 Dead();
         }
-        else if(collision.gameObject.GetComponent<FinishPlatform>() != null)
+        else if (collision.gameObject.GetComponent<FinishPlatform>() != null)
         {
             _body.velocity = Vector3.zero;
             GameManager.Winning();
